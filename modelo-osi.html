@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo OSI | Redes.estudio</title>
+  <meta name="description" content="Las 7 capas del modelo OSI: física, enlace, red, transporte, sesión, presentación y aplicación.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-tema" data-color="osi">
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="topologias.html">Topologías</a></li>
+        <li><a href="modelo-osi.html" class="active">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tema-hero reveal">
+      <p class="eyebrow">Tema 2 de 4</p>
+      <h1>Modelo OSI</h1>
+      <p class="hero-lead">
+        El modelo <strong>OSI</strong> (Open Systems Interconnection) es un modelo de
+        referencia teórico que divide la comunicación de red en <strong>7 capas</strong>.
+        Surgió para que fabricantes y desarrolladores distintos pudieran crear equipos y
+        programas compatibles entre sí, siguiendo todos las mismas reglas por capa, sin
+        tener que ponerse de acuerdo en cada detalle técnico.
+      </p>
+    </section>
+
+    <!-- ===================== VENTAJAS DE UN SISTEMA DE CAPAS ===================== -->
+    <section class="section-block reveal">
+      <h2>¿Por qué dividir todo en capas?</h2>
+      <p class="section-lead">
+        Un sistema de capas separa un problema enorme y complejo (toda la comunicación de
+        una red) en partes más chicas y manejables. Estas son las ventajas principales:
+      </p>
+      <ul class="check-list">
+        <li>Simplifica sistemas extremadamente grandes y complejos.</li>
+        <li>Permite compartir recursos: programas, equipos y datos.</li>
+        <li>Da mayor confiabilidad, al contar con fuentes alternativas de datos, equipos y programas.</li>
+        <li>Facilita el mantenimiento y la actualización de los sistemas (se puede cambiar una capa sin tocar las demás).</li>
+        <li>Permite escalabilidad: se pueden sumar más servidores y clientes sin rediseñar todo.</li>
+        <li>Ordena la comunicación entre dispositivos.</li>
+        <li>Facilita el acceso a información y datos remotos (bancos, buscadores, periódicos, compras online).</li>
+      </ul>
+    </section>
+
+    <!-- ===================== LAS 7 CAPAS (FERTSPA) ===================== -->
+    <section class="section-block reveal">
+      <h2>Las 7 capas: FERTSPA</h2>
+      <p class="section-lead">
+        Un truco para recordar las 7 capas en orden (de la más cercana al usuario a la más
+        cercana al cable) es la palabra <strong>FERTSPA</strong>: Física, Enlace, Red,
+        Transporte, Sesión, Presentación y Aplicación. Hacé clic en cada una para ver su función.
+      </p>
+
+      <div class="accordion" id="accordionOsi">
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">7</span>
+            <span>Aplicación</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Es la capa más cercana al usuario final. Con ella interactúan los programas
+              (navegador, cliente de correo, etc.) sin que el usuario se dé cuenta de que
+              existe. Sus funciones principales son:</p>
+            <ul>
+              <li>Identificar a los usuarios.</li>
+              <li>Determinar la disponibilidad de los recursos de red.</li>
+              <li>Sincronizar la comunicación entre las aplicaciones.</li>
+            </ul>
+            <p>Protocolos típicos de esta capa: <strong>FTP</strong> (transferencia de archivos),
+              <strong>SMTP</strong> (envío de correo), <strong>POP</strong> e
+              <strong>IMAP</strong> (recepción de correo), <strong>TELNET</strong> (terminal
+              virtual), <strong>SNMP</strong> (gestión de red) y <strong>HTTP</strong>
+              (transferencia de hipertexto, la web).</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">6</span>
+            <span>Presentación</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Se encarga de los formatos en que se representan los datos, de los esquemas de
+              compresión, de la encriptación y de la conversión de datos, para que dos sistemas
+              distintos puedan "entenderse" aunque usen formatos internos diferentes.</p>
+            <p><strong>Estándares de imagen</strong> además de GIF: JPEG, PNG, BMP.</p>
+            <p><strong>Estándares de video</strong> además de MPEG: AVI, MOV, WMV.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">5</span>
+            <span>Sesión</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Establece, administra y finaliza las sesiones de comunicación entre dos
+              entidades que provienen de la capa de presentación. Es la capa que "abre y
+              cierra la conversación" entre dos equipos.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">4</span>
+            <span>Transporte</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Divide los datos que recibe de la capa de sesión en unidades más pequeñas.
+              Sus funciones son:</p>
+            <ul>
+              <li><strong>Control de flujo:</strong> procura que el receptor no reciba más datos de los que puede procesar.</li>
+              <li><strong>Multiplexado:</strong> pone datos de diferentes aplicaciones en un enlace físico y lógico común.</li>
+              <li><strong>Administración de circuitos virtuales.</strong></li>
+              <li><strong>Verificación y recuperación de errores.</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">3</span>
+            <span>Red</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Se encarga del direccionamiento lógico (las direcciones IP) y de elegir la
+              mejor ruta para que los datos lleguen de un punto a otro. El dispositivo que
+              trabaja en esta capa es el <strong>router</strong> (enrutador).</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">2</span>
+            <span>Enlace</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Organiza los bits en tramas (grupos de datos) y controla cómo los dispositivos
+              acceden al medio físico compartido (por ejemplo, cuándo puede "hablar" cada
+              equipo en un mismo cable). Sí, su función está directamente relacionada con el
+              control de acceso al medio.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">1</span>
+            <span>Física</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Es la capa más "de hardware" de todas. Define las especificaciones de los
+              elementos físicos: cables, voltajes, conectores, tarjetas de red, y cómo se
+              transmiten literalmente los bits (como señales eléctricas, luz u ondas de radio).</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TRADUCTOR DE PROTOCOLOS (interactivo) ===================== -->
+    <section class="section-block reveal">
+      <h2>Traductor de protocolos</h2>
+      <p class="section-lead">Elegí un protocolo y te decimos a qué capa del modelo OSI pertenece.</p>
+
+      <div class="translator">
+        <label for="selectProtocolo">Protocolo:</label>
+        <select id="selectProtocolo">
+          <option value="">— Elegí un protocolo —</option>
+          <option value="HTTP">HTTP</option>
+          <option value="FTP">FTP</option>
+          <option value="SMTP">SMTP</option>
+          <option value="POP">POP</option>
+          <option value="IMAP">IMAP</option>
+          <option value="TELNET">TELNET</option>
+          <option value="SNMP">SNMP</option>
+          <option value="TCP">TCP</option>
+          <option value="UDP">UDP</option>
+        </select>
+        <div class="translator-result" id="translatorResult">
+          Elegí un protocolo de la lista para ver el resultado acá.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TCP vs UDP ===================== -->
+    <section class="section-block reveal">
+      <h2>TCP y UDP: los dos protocolos de transporte</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th></th><th>TCP</th><th>UDP</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Confiable</td><td>Sí</td><td>No</td></tr>
+            <tr><td>Orientado a la conexión</td><td>Sí</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <strong>TCP</strong> es el más confiable: antes de enviar datos, establece una
+        "conversación" previa entre ambos equipos para garantizar que todo llegue en orden y
+        sin errores. <strong>UDP</strong> no necesita esa conversación previa, por eso es más
+        rápido pero no garantiza que los datos lleguen completos.
+      </p>
+    </section>
+
+    <!-- ===================== COMUNICACIÓN VERTICAL Y HORIZONTAL ===================== -->
+    <section class="section-block reveal">
+      <h2>Para seguir aprendiendo: comunicación vertical y horizontal</h2>
+      <div class="info-card">
+        <p>
+          En un modelo de capas hay dos tipos de comunicación. Cuando una capa se comunica
+          con la capa inferior (dentro del mismo equipo), es <strong>comunicación vertical</strong>.
+          Cuando una capa se comunica con la misma capa de otro equipo (host), es
+          <strong>comunicación horizontal</strong>.
+        </p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th></th><th>Comunicación vertical</th><th>Comunicación horizontal</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Servicios</td><td>X</td><td></td></tr>
+              <tr><td>Protocolos</td><td></td><td>X</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          La comunicación vertical (entre capas de un mismo equipo) se implementa mediante
+          <strong>servicios</strong> que una capa le ofrece a la capa de arriba. La comunicación
+          horizontal (entre capas iguales de equipos distintos) se implementa mediante
+          <strong>protocolos</strong>, que son las reglas que ambas puntas deben respetar por igual.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

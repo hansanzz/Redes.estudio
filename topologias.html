@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topologías de Red | Redes.estudio</title>
+  <meta name="description" content="Topología física de una red: bus, anillo, estrella, estrella extendida, jerárquica y malla. LAN, WAN, Internet y VPN.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-tema" data-color="topologias">
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="topologias.html" class="active">Topologías</a></li>
+        <li><a href="modelo-osi.html">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== HERO DE TEMA ===================== -->
+    <section class="tema-hero reveal">
+      <p class="eyebrow">Tema 1 de 4</p>
+      <h1>Topologías de Red</h1>
+      <p class="hero-lead">
+        La <strong>topología física</strong> de una red es la forma en que los cables y los
+        dispositivos están dispuestos y conectados entre sí. No es lo mismo el "mapa" físico
+        de cables que la forma en que los datos viajan lógicamente, pero acá nos enfocamos en
+        cómo se arma la red en la práctica: qué tan fácil es instalarla y qué tan bien resiste
+        que algo falle.
+      </p>
+    </section>
+
+    <!-- ===================== 6 TOPOLOGÍAS EN ACORDEÓN ===================== -->
+    <section class="section-block reveal">
+      <h2>Las 6 topologías físicas</h2>
+      <p class="section-lead">Hacé clic en cada tarjeta para ver el diagrama, las características, ventajas y desventajas.</p>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon" aria-hidden="true">💡</span>
+        <p><strong>Dato para memorizar:</strong> la topología en <strong>estrella</strong> es, por lejos, la más usada hoy en redes hogareñas y de oficina, porque combina buena simplicidad de armado con buena confiabilidad frente a fallas.</p>
+      </div>
+
+      <div class="accordion-controls">
+        <button class="btn btn-ghost btn-small" id="btnCerrarTodo" data-accordion="accordionTopologias">Cerrar todos los paneles</button>
+      </div>
+
+      <div class="accordion" id="accordionTopologias">
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">01</span>
+            <span>Bus</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>Todos los equipos se conectan a un único cable central (el "bus"), que actúa
+              como columna vertebral de la red. Cada dispositivo se conecta a ese cable mediante
+              un conector.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Buena. Es la más fácil y barata de instalar, ya que usa poco cable.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Mala. Si el cable central se corta, toda la red deja de funcionar.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología bus: un cable horizontal con equipos conectados">
+                <line x1="30" y1="70" x2="290" y2="70" class="diag-cable"></line>
+                <g class="diag-node"><rect x="18" y="30" width="24" height="24" rx="4"></rect><line x1="30" y1="54" x2="30" y2="70" class="diag-drop"></line></g>
+                <g class="diag-node"><rect x="88" y="90" width="24" height="24" rx="4"></rect><line x1="100" y1="90" x2="100" y2="70" class="diag-drop"></line></g>
+                <g class="diag-node"><rect x="148" y="30" width="24" height="24" rx="4"></rect><line x1="160" y1="54" x2="160" y2="70" class="diag-drop"></line></g>
+                <g class="diag-node"><rect x="208" y="90" width="24" height="24" rx="4"></rect><line x1="220" y1="90" x2="220" y2="70" class="diag-drop"></line></g>
+                <g class="diag-node"><rect x="266" y="30" width="24" height="24" rx="4"></rect><line x1="278" y1="54" x2="278" y2="70" class="diag-drop"></line></g>
+              </svg>
+              <p class="diagram-caption">Un único cable central, con cada equipo conectado a él por una derivación.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">02</span>
+            <span>Anillo</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>Cada equipo se conecta exactamente con otros dos, formando un círculo cerrado.
+              La información viaja en un sentido (o en ambos, en anillos dobles) pasando de
+              nodo en nodo hasta llegar a destino.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Regular. Requiere más planificación que el bus.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Regular a mala. Si se corta un tramo del anillo (y no hay anillo doble), la red completa se puede ver afectada.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología anillo: equipos conectados en círculo cerrado">
+                <polygon points="130,20 220,80 190,180 70,180 40,80" class="diag-cable" fill="none"></polygon>
+                <g class="diag-node"><rect x="118" y="8" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="208" y="68" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="178" y="168" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="58" y="168" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="28" y="68" width="24" height="24" rx="4"></rect></g>
+              </svg>
+              <p class="diagram-caption">Cada equipo se conecta con otros dos, formando un círculo cerrado.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">03</span>
+            <span>Estrella</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>Todos los equipos se conectan a un dispositivo central (un switch o hub), que
+              es el que administra el tráfico de la red. Es la topología más usada hoy en redes
+              LAN domésticas y de oficina.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Buena. Es sencilla de instalar y de agregar nuevos equipos.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Buena. Si falla un cable, solo afecta a ese equipo, no a toda la red. Eso sí, si falla el dispositivo central, toda la red cae.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología estrella: equipos conectados a un dispositivo central">
+                <line x1="130" y1="110" x2="130" y2="24" class="diag-cable"></line>
+                <line x1="130" y1="110" x2="222" y2="70" class="diag-cable"></line>
+                <line x1="130" y1="110" x2="196" y2="188" class="diag-cable"></line>
+                <line x1="130" y1="110" x2="64" y2="188" class="diag-cable"></line>
+                <line x1="130" y1="110" x2="38" y2="70" class="diag-cable"></line>
+                <g class="diag-node diag-hub"><rect x="112" y="92" width="36" height="36" rx="6"></rect></g>
+                <g class="diag-node"><rect x="118" y="4" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="210" y="58" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="184" y="176" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="52" y="176" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="26" y="58" width="24" height="24" rx="4"></rect></g>
+              </svg>
+              <p class="diagram-caption">Un switch o hub central concentra todas las conexiones.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">04</span>
+            <span>Estrella extendida</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>Es una topología en estrella donde, en lugar de un único dispositivo central,
+              hay varios dispositivos centrales conectados entre sí, cada uno con su propia
+              "estrella" de equipos. Es lo que se usa para conectar varias oficinas o pisos
+              de un edificio.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Regular. Es más compleja que una estrella simple porque hay más dispositivos que coordinar.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Buena. Distribuye el riesgo: si cae un concentrador, solo afecta a su propia rama.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología estrella extendida: varios concentradores conectados entre sí, cada uno con su propia estrella de equipos">
+                <line x1="80" y1="100" x2="240" y2="100" class="diag-cable"></line>
+                <line x1="80" y1="100" x2="30" y2="40" class="diag-cable"></line>
+                <line x1="80" y1="100" x2="30" y2="160" class="diag-cable"></line>
+                <line x1="80" y1="100" x2="130" y2="40" class="diag-cable"></line>
+                <line x1="240" y1="100" x2="190" y2="40" class="diag-cable"></line>
+                <line x1="240" y1="100" x2="290" y2="40" class="diag-cable"></line>
+                <line x1="240" y1="100" x2="290" y2="160" class="diag-cable"></line>
+                <g class="diag-node diag-hub"><rect x="64" y="84" width="32" height="32" rx="6"></rect></g>
+                <g class="diag-node diag-hub"><rect x="224" y="84" width="32" height="32" rx="6"></rect></g>
+                <g class="diag-node"><rect x="18" y="28" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="18" y="150" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="118" y="28" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="178" y="28" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="278" y="28" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="278" y="150" width="22" height="22" rx="4"></rect></g>
+              </svg>
+              <p class="diagram-caption">Varios concentradores conectados entre sí, cada uno con su propia estrella de equipos.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">05</span>
+            <span>Jerárquica</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>También llamada topología en árbol. Organiza los dispositivos en niveles, como
+              un organigrama: un nodo principal en la parte superior se conecta con nodos
+              secundarios, y estos a su vez con otros nodos, formando ramas.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Regular. Necesita planificación por niveles.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Regular. Si falla un nodo de un nivel alto, se pierde comunicación con todas las ramas que dependen de él.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 300 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología jerárquica: un nodo principal en la parte superior conectado a nodos secundarios que se ramifican hacia abajo">
+                <line x1="150" y1="34" x2="80" y2="90" class="diag-cable"></line>
+                <line x1="150" y1="34" x2="220" y2="90" class="diag-cable"></line>
+                <line x1="80" y1="102" x2="40" y2="156" class="diag-cable"></line>
+                <line x1="80" y1="102" x2="110" y2="156" class="diag-cable"></line>
+                <line x1="220" y1="102" x2="190" y2="156" class="diag-cable"></line>
+                <line x1="220" y1="102" x2="260" y2="156" class="diag-cable"></line>
+                <g class="diag-node diag-hub"><rect x="134" y="18" width="32" height="24" rx="5"></rect></g>
+                <g class="diag-node"><rect x="66" y="90" width="26" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="206" y="90" width="26" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="28" y="152" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="98" y="152" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="178" y="152" width="22" height="22" rx="4"></rect></g>
+                <g class="diag-node"><rect x="248" y="152" width="22" height="22" rx="4"></rect></g>
+              </svg>
+              <p class="diagram-caption">Los dispositivos se organizan en niveles, como un organigrama.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">06</span>
+            <span>Malla</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <div class="topology-content">
+              <div class="topology-text">
+                <p>Cada equipo se conecta con todos (o varios) de los demás equipos de la red,
+              generando múltiples caminos posibles para que viaje la información. Es la
+              topología que usa, por ejemplo, la columna vertebral de Internet entre grandes
+              proveedores.</p>
+            <ul>
+              <li><strong>Simplicidad de armado:</strong> Mala. Requiere muchísimo cableado y es cara de instalar.</li>
+              <li><strong>Confiabilidad frente a fallas:</strong> Buena. Si un enlace falla, la información puede tomar otro camino alternativo.</li>
+            </ul>
+              </div>
+              <div class="topology-diagram">
+              <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama de topología malla: todos los equipos conectados entre sí con múltiples caminos posibles">
+                <g class="diag-cable-group">
+                  <line x1="130" y1="20" x2="220" y2="80"></line>
+                  <line x1="130" y1="20" x2="190" y2="180"></line>
+                  <line x1="130" y1="20" x2="70" y2="180"></line>
+                  <line x1="130" y1="20" x2="40" y2="80"></line>
+                  <line x1="220" y1="80" x2="190" y2="180"></line>
+                  <line x1="220" y1="80" x2="70" y2="180"></line>
+                  <line x1="220" y1="80" x2="40" y2="80"></line>
+                  <line x1="190" y1="180" x2="70" y2="180"></line>
+                  <line x1="190" y1="180" x2="40" y2="80"></line>
+                  <line x1="70" y1="180" x2="40" y2="80"></line>
+                </g>
+                <g class="diag-node"><rect x="118" y="8" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="208" y="68" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="178" y="168" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="58" y="168" width="24" height="24" rx="4"></rect></g>
+                <g class="diag-node"><rect x="28" y="68" width="24" height="24" rx="4"></rect></g>
+              </svg>
+              <p class="diagram-caption">Cada equipo tiene múltiples conexiones directas con los demás.</p>
+            </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TABLA RESUMEN ===================== -->
+    <section class="section-block reveal">
+      <h2>Tabla comparativa</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Topología</th>
+              <th>Simplicidad de armado</th>
+              <th>Confiabilidad frente a fallas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Bus</td><td>Buena</td><td>Mala</td></tr>
+            <tr><td>Anillo</td><td>Regular</td><td>Regular</td></tr>
+            <tr><td>Estrella</td><td>Buena</td><td>Buena</td></tr>
+            <tr><td>Estrella extendida</td><td>Regular</td><td>Buena</td></tr>
+            <tr><td>Jerárquica</td><td>Regular</td><td>Regular</td></tr>
+            <tr><td>Malla</td><td>Mala</td><td>Buena</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== COMPARADOR LAN / WAN / INTERNET (interactivo) ===================== -->
+    <section class="section-block reveal">
+      <h2>LAN, WAN e Internet</h2>
+      <p class="section-lead">
+        Estas categorías no describen la forma de la red, sino su <strong>alcance</strong>:
+        qué distancia cubren. Elegí una opción para ver su cobertura y su distancia típica.
+      </p>
+
+      <div class="comparator">
+        <div class="comparator-buttons" role="group" aria-label="Elegir tipo de red">
+          <button class="comp-btn active" data-red="lan">LAN</button>
+          <button class="comp-btn" data-red="wan">WAN</button>
+          <button class="comp-btn" data-red="internet">Internet</button>
+        </div>
+
+        <div class="comparator-result" id="comparatorResult">
+          <h3 id="compTitulo">LAN — Red de Área Local</h3>
+          <p><strong>Distancia típica:</strong> <span id="compDistancia">Menos de 1 km</span></p>
+          <p><strong>Cobertura habitual:</strong> <span id="compCobertura">Habitaciones, un edificio, o algunos edificios cercanos</span></p>
+        </div>
+      </div>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon" aria-hidden="true">⚠</span>
+        <p><strong>Ojo con este error común:</strong> LAN, WAN e Internet no son "topologías" distintas, son categorías de <strong>alcance</strong>. Una misma red WAN puede estar armada, por dentro, con topología de malla, jerárquica, o una combinación de varias.</p>
+      </div>
+
+      <div class="info-card">
+        <h3>¿Y una VPN?</h3>
+        <p>
+          Una <strong>VPN</strong> (Red Privada Virtual) establece, a través de Internet, una
+          conexión entre un punto de inicio y uno final, con mayor seguridad: cifra los datos,
+          autentica a los usuarios y oculta la dirección IP real. Aunque los datos viajen por
+          Internet (que es una WAN gigante), la VPN hace que esos equipos se "vean" y se
+          comporten como si estuvieran conectados en una <strong>LAN</strong>: comparten recursos
+          y confían entre sí como si fueran parte de la misma red local, aunque estén a miles
+          de kilómetros de distancia.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== PARA SEGUIR APRENDIENDO ===================== -->
+    <section class="section-block reveal">
+      <h2>Para seguir aprendiendo</h2>
+      <div class="info-card">
+        <p>
+          Una red es la interconexión de equipos como enrutadores, hubs, computadoras,
+          switches, impresoras y demás dispositivos. La forma en que cada uno accede al medio
+          y la forma en que están cableados dan lugar a dos tipos de topologías diferentes:
+        </p>
+        <ul>
+          <li><strong>Topología física:</strong> la disposición real de cables y dispositivos (la que vimos en esta página).</li>
+          <li><strong>Topología lógica:</strong> la forma en que los datos viajan realmente dentro de esa red, que no siempre coincide con el cableado físico.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,953 @@
+/* ==========================================================================
+   REDES.ESTUDIO — HOJA DE ESTILOS PRINCIPAL
+   Paleta basada en teoría del color:
+   - Fondo marfil cálido: reduce fatiga visual y ansiedad de estudio.
+   - Sin rojo puro en ningún estado (ni errores): evita elevar el estrés.
+   - Cada tema tiene su propio color con significado (ver README / index.html).
+   ========================================================================== */
+
+/* ---------- 1. VARIABLES GLOBALES ---------- */
+:root {
+  /* Base neutra cálida */
+  --bg: #FBF7F0;
+  --bg-alt: #F3ECE1;
+  --surface: #FFFFFF;
+  --ink: #2B2620;
+  --muted: #6B6259;
+  --border: #E5DCCB;
+
+  /* Color "de marca" por defecto (home) */
+  --accent: #2C5F7C;
+  --accent-ink: #FFFFFF;
+
+  /* Estado de error/atención: terracota apagado, nunca rojo puro */
+  --warn: #B5654A;
+
+  /* Colores temáticos (definidos con significado, ver index.html) */
+  --c-topologias: #2C5F7C;
+  --c-topologias-soft: #DCE9F0;
+  --c-osi: #5B4B8A;
+  --c-osi-soft: #E6E1F2;
+  --c-tcpip: #C9683F;
+  --c-tcpip-soft: #F5E1D3;
+  --c-ip: #2F7A5E;
+  --c-ip-soft: #DCEDE4;
+
+  /* Tipografía */
+  --font-display: 'JetBrains Mono', 'Courier New', monospace;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --max-width: 1120px;
+  --radius: 14px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 20px rgba(43, 38, 32, 0.06);
+  --shadow-md: 0 10px 30px rgba(43, 38, 32, 0.10);
+
+  --transition: 200ms ease;
+}
+
+/* Cada página temática sobrescribe --accent según su data-color */
+body.page-tema[data-color="topologias"] { --accent: var(--c-topologias); --accent-soft: var(--c-topologias-soft); }
+body.page-tema[data-color="osi"]        { --accent: var(--c-osi);        --accent-soft: var(--c-osi-soft); }
+body.page-tema[data-color="tcpip"]      { --accent: var(--c-tcpip);      --accent-soft: var(--c-tcpip-soft); }
+body.page-tema[data-color="ip"]         { --accent: var(--c-ip);         --accent-soft: var(--c-ip-soft); }
+
+/* ---------- 2. RESET BÁSICO ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+
+a { color: inherit; text-decoration: none; }
+
+ul { list-style: none; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+input, select {
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Foco visible accesible en todo elemento interactivo */
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- 3. UTILIDADES DE LAYOUT ---------- */
+main { display: block; }
+
+.section-block {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 2rem);
+}
+
+.section-block > h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.section-block > .section-lead {
+  max-width: 68ch;
+  color: var(--muted);
+  margin: 0 auto 1.75rem;
+  font-size: 1.02rem;
+  text-align: center;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+/* Bloques de contenido (acordeón, tablas, tarjetas) centrados y con ancho
+   de lectura cómodo, para que no queden pegados al margen izquierdo */
+.accordion,
+.table-wrap,
+.translator,
+.ip-calculator,
+.comparator,
+.matching-game,
+.cards-grid,
+.check-list,
+.ip-bytes-demo,
+.start-picker,
+.start-result {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-card {
+  max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* Animación de aparición al hacer scroll (IntersectionObserver la activa) */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- 4. NAVEGACIÓN ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(251, 247, 240, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem clamp(1.25rem, 4vw, 2rem);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.brand em { color: var(--accent); font-style: normal; }
+.brand-icon { color: var(--accent); }
+
+.nav-menu {
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.75rem);
+}
+
+.nav-menu a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 0.4rem 0.2rem;
+  border-bottom: 2px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Botón hamburguesa, oculto en desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- 5. HERO (HOME) ---------- */
+.hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  margin-bottom: 1rem;
+  color: var(--ink);
+}
+
+.hero-lead {
+  color: var(--muted);
+  font-size: 1.08rem;
+  max-width: 52ch;
+  margin-bottom: 1rem;
+}
+
+.hero-hint {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---------- 6. MAPA DE RED SVG (HOME) ---------- */
+.network-map svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.cable {
+  stroke: var(--border);
+  stroke-width: 2.5;
+  stroke-dasharray: 6 6;
+  animation: dash-flow 3.5s linear infinite;
+}
+@keyframes dash-flow {
+  to { stroke-dashoffset: -120; }
+}
+
+.node circle {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 2;
+  transition: transform var(--transition), stroke var(--transition), fill var(--transition);
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+.node-center circle {
+  fill: var(--ink);
+  stroke: var(--ink);
+}
+.node-center text {
+  fill: var(--bg);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.node-link { cursor: pointer; }
+.node-link text {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 13px;
+  fill: var(--ink);
+  pointer-events: none;
+}
+.node-link .node-sub {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 10px;
+  fill: var(--muted);
+}
+
+.node-link[data-color="topologias"] circle { stroke: var(--c-topologias); }
+.node-link[data-color="osi"] circle        { stroke: var(--c-osi); }
+.node-link[data-color="tcpip"] circle      { stroke: var(--c-tcpip); }
+.node-link[data-color="ip"] circle         { stroke: var(--c-ip); }
+
+.node-link:hover circle,
+.node-link:focus circle {
+  transform: scale(1.06);
+}
+.node-link[data-color="topologias"]:hover circle { fill: var(--c-topologias-soft); }
+.node-link[data-color="osi"]:hover circle        { fill: var(--c-osi-soft); }
+.node-link[data-color="tcpip"]:hover circle      { fill: var(--c-tcpip-soft); }
+.node-link[data-color="ip"]:hover circle         { fill: var(--c-ip-soft); }
+
+/* ---------- 7. LEYENDA DE COLORES (HOME) ---------- */
+.color-legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.legend-item {
+  display: flex;
+  gap: 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.legend-item .dot {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-top: 0.3rem;
+}
+.legend-item[data-color="topologias"] .dot { background: var(--c-topologias); }
+.legend-item[data-color="osi"] .dot        { background: var(--c-osi); }
+.legend-item[data-color="tcpip"] .dot      { background: var(--c-tcpip); }
+.legend-item[data-color="ip"] .dot         { background: var(--c-ip); }
+
+.legend-item strong { display: block; margin-bottom: 0.35rem; font-size: 0.98rem; }
+.legend-item p { color: var(--muted); font-size: 0.92rem; }
+
+/* ---------- 8. HERO DE PÁGINA TEMÁTICA ---------- */
+.tema-hero {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2rem) 1rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.tema-hero .hero-lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tema-hero h1 {
+  font-size: clamp(2rem, 4.5vw, 2.8rem);
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+/* ---------- 9. TARJETAS / ACORDEÓN ---------- */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.accordion-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.accordion-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background var(--transition);
+}
+.accordion-header:hover { background: var(--accent-soft, var(--bg-alt)); }
+
+.accordion-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--accent);
+  min-width: 1.8rem;
+}
+
+.accordion-header span:nth-child(2) { flex: 1; }
+
+.accordion-icon {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition: transform var(--transition);
+}
+.accordion-header[aria-expanded="true"] .accordion-icon { transform: rotate(45deg); }
+
+.accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 350ms ease, padding var(--transition);
+  padding: 0 1.3rem;
+  color: var(--muted);
+}
+.accordion-panel.is-open {
+  padding: 0 1.3rem 1.3rem;
+}
+
+.accordion-panel p { margin-bottom: 0.75rem; }
+.accordion-panel ul { margin: 0.5rem 0 0.75rem 1.2rem; list-style: disc; }
+.accordion-panel li { margin-bottom: 0.4rem; }
+.accordion-panel code {
+  background: var(--bg-alt);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  font-family: var(--font-display);
+  font-size: 0.9em;
+}
+
+/* ---------- 10. LISTAS CON CHECK ---------- */
+.check-list li {
+  position: relative;
+  padding-left: 1.6rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+}
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* ---------- 11. TABLAS ---------- */
+.table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 480px;
+}
+
+thead {
+  background: var(--accent);
+  color: #fff;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.94rem;
+}
+
+tbody tr:nth-child(even) { background: var(--bg-alt); }
+tbody tr { border-top: 1px solid var(--border); }
+
+/* ---------- 12. TARJETAS INFO / GRID ---------- */
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--muted);
+}
+.info-card h3 { color: var(--ink); font-size: 1.05rem; margin-bottom: 0.6rem; }
+.info-card p, .info-card ul { margin-bottom: 0.6rem; }
+.info-card ul { margin-left: 1.2rem; list-style: disc; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* ---------- 13. COMPARADOR LAN/WAN/INTERNET ---------- */
+.comparator-buttons {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.comp-btn {
+  padding: 0.6rem 1.3rem;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--muted);
+  transition: all var(--transition);
+}
+.comp-btn:hover { border-color: var(--accent); color: var(--accent); }
+.comp-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.comparator-result {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.comparator-result h3 { color: var(--accent); margin-bottom: 0.75rem; font-size: 1.15rem; }
+.comparator-result p { margin-bottom: 0.4rem; }
+
+/* ---------- 14. TRADUCTOR DE PROTOCOLOS ---------- */
+.translator {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 520px;
+}
+
+.translator label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+
+.translator select {
+  width: 100%;
+  padding: 0.7rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 1rem;
+  background: var(--bg);
+}
+
+.translator-result {
+  background: var(--bg-alt);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  font-size: 0.95rem;
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+}
+.translator-result.has-result {
+  border-left: 4px solid var(--accent);
+  font-weight: 500;
+}
+
+/* ---------- 15. JUEGO DE RELACIONAR (TCP/IP) ---------- */
+.matching-game {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 700px;
+}
+
+.matching-col { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.match-item {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  text-align: left;
+  font-weight: 500;
+  transition: all var(--transition);
+}
+.match-item:hover { border-color: var(--accent); }
+.match-item.selected { border-color: var(--accent); background: var(--accent-soft, var(--bg-alt)); }
+.match-item.correct { border-color: var(--c-ip); background: var(--c-ip-soft); }
+.match-item.incorrect { border-color: var(--warn); background: #F5E4DC; }
+
+.matching-feedback {
+  margin-top: 1rem;
+  font-weight: 600;
+  min-height: 1.5rem;
+}
+
+/* ---------- 16. DIRECCIONAMIENTO IP: BYTES Y CALCULADORA ---------- */
+.ip-bytes-demo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.byte-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--accent-soft, var(--bg-alt));
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  min-width: 70px;
+}
+.byte-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.byte-value { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.byte-dot { font-size: 1.5rem; font-weight: 800; color: var(--muted); }
+
+.ip-calculator {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 520px;
+}
+
+.ip-result {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--bg-alt);
+  min-height: 2.5rem;
+  font-size: 0.95rem;
+}
+.ip-result.has-result { border-left: 4px solid var(--accent); font-weight: 500; }
+.ip-result.is-error { border-left: 4px solid var(--warn); color: var(--warn); font-weight: 600; }
+
+/* ---------- 17. FORMULARIOS (usados en la calculadora de IP) ---------- */
+.form-field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  font-size: 0.94rem;
+}
+
+.form-field input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: border-color var(--transition);
+}
+.form-field input:focus { border-color: var(--accent); outline: none; }
+.form-field input.is-invalid { border-color: var(--warn); }
+
+.field-error {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--warn);
+  font-size: 0.82rem;
+  min-height: 1.1rem;
+}
+
+.form-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all var(--transition);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+.btn-primary:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  border: 2px solid var(--border);
+  color: var(--ink);
+}
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-small {
+  padding: 0.5rem 1.1rem;
+  font-size: 0.85rem;
+}
+
+/* ---------- 17.b DIAGRAMAS DE TOPOLOGÍA: texto a la izquierda, gráfico a la derecha ---------- */
+.accordion-controls {
+  max-width: 780px;
+  margin: 0 auto 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.topology-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.topology-text {
+  flex: 1 1 55%;
+  min-width: 0;
+  text-align: left;
+}
+.topology-text p { text-align: left; }
+.topology-text ul { text-align: left; }
+
+.topology-diagram {
+  flex: 0 0 260px;
+  width: 260px;
+  text-align: center;
+}
+
+.topology-diagram svg {
+  width: 100%;
+  height: auto;
+  max-width: 260px;
+}
+
+.diagram-caption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Nodos (equipos): cuadrados con borde de color de acento */
+.diag-node rect {
+  fill: var(--surface);
+  stroke: var(--accent);
+  stroke-width: 2.5;
+}
+.diag-node.diag-hub rect {
+  fill: var(--accent);
+  stroke: var(--accent);
+}
+
+/* Cables/líneas que unen los componentes */
+.diag-cable {
+  stroke: var(--muted);
+  stroke-width: 2.5;
+  fill: none;
+}
+.diag-drop {
+  stroke: var(--muted);
+  stroke-width: 2.5;
+}
+.diag-cable-group line {
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+/* ---------- 17.c AVISOS / CALLOUTS ---------- */
+.callout {
+  max-width: 780px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--radius-sm);
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft, var(--bg-alt));
+}
+
+.callout p { color: var(--ink); font-size: 0.95rem; text-align: left; }
+
+.callout-icon { font-size: 1.2rem; line-height: 1.4; flex-shrink: 0; }
+
+.callout-warn {
+  border-left-color: var(--warn);
+  background: #F5E7DE;
+}
+
+/* ---------- 17.d SELECTOR "¿POR DÓNDE EMPEZAR?" (home) ---------- */
+.start-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.pick-btn {
+  padding: 0.8rem 1.3rem;
+  border: 2px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--muted);
+  background: var(--surface);
+  transition: all var(--transition);
+}
+.pick-btn:hover { border-color: var(--accent); color: var(--accent); }
+.pick-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.start-result {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  text-align: center;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+.start-result.has-result { border-left: 4px solid var(--accent); color: var(--ink); text-align: left; }
+
+/* ---------- 18. FOOTER ---------- */
+.site-footer {
+  background: var(--ink);
+  color: var(--bg);
+  margin-top: 3rem;
+}
+
+.footer-grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2.5rem clamp(1.25rem, 4vw, 2rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.brand-footer {
+  font-family: var(--font-display);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: #fff;
+}
+
+.footer-grid p { color: #B9B2A6; font-size: 0.88rem; margin-bottom: 0.3rem; }
+.footer-info span { color: #fff; font-weight: 600; }
+
+/* ---------- 19. BOTÓN VOLVER ARRIBA ---------- */
+.btn-top {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all var(--transition);
+  z-index: 90;
+}
+.btn-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.btn-top:hover { filter: brightness(1.1); }
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+/* Tablets */
+@media (max-width: 860px) {
+  .hero { grid-template-columns: 1fr; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .topology-diagram { flex: 0 0 210px; width: 210px; }
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+  .nav-toggle { display: flex; }
+
+  .nav-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    padding: 1rem clamp(1.25rem, 4vw, 2rem) 1.5rem;
+    gap: 0.25rem;
+    display: none;
+  }
+  .nav-menu.is-open { display: flex; }
+  .nav-menu a { display: block; padding: 0.6rem 0; }
+
+  .color-legend { grid-template-columns: 1fr; }
+
+  .matching-game { grid-template-columns: 1fr; gap: 1rem; }
+
+  table { min-width: 420px; }
+
+  .ip-bytes-demo { gap: 0.2rem; }
+  .byte-box { min-width: 58px; padding: 0.6rem 0.5rem; }
+  .byte-value { font-size: 1.05rem; }
+
+  /* En mobile, el diagrama pasa a estar debajo del texto, no al costado */
+  .topology-content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .topology-text { text-align: left; width: 100%; }
+  .topology-diagram { flex: 0 0 auto; width: 100%; max-width: 260px; margin: 0 auto; }
+
+  .accordion-controls { justify-content: center; }
+}
+
+@media (max-width: 420px) {
+  .section-block { padding-left: 1rem; padding-right: 1rem; }
+  .btn { padding: 0.7rem 1.1rem; font-size: 0.9rem; }
+}

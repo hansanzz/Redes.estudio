@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modelo TCP/IP | Redes.estudio</title>
+  <meta name="description" content="Las 4 capas del modelo TCP/IP, protocolos de Internet, transporte y aplicación, puertos y direcciones físicas y lógicas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-tema" data-color="tcpip">
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="topologias.html">Topologías</a></li>
+        <li><a href="modelo-osi.html">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html" class="active">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tema-hero reveal">
+      <p class="eyebrow">Tema 3 de 4</p>
+      <h1>Modelo TCP/IP</h1>
+      <p class="hero-lead">
+        Mientras que OSI es un modelo <em>teórico</em> de 7 capas, <strong>TCP/IP</strong> es
+        el modelo que realmente se usa en Internet: tiene solo <strong>4 capas</strong> y agrupa
+        varias funciones de OSI en una sola. Es "menos prolijo" en la teoría, pero es el que de
+        verdad mueve cada dato que viaja por la red.
+      </p>
+    </section>
+
+    <!-- ===================== LAS 4 CAPAS Y SU RELACIÓN CON OSI ===================== -->
+    <section class="section-block reveal">
+      <h2>Las 4 capas del modelo TCP/IP</h2>
+      <p class="section-lead">
+        Cada capa de TCP/IP agrupa una o más capas de OSI. Compará ambos modelos en esta tabla:
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Modelo TCP/IP (4 capas)</th><th>Equivalente en OSI (7 capas)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Aplicación</td><td>Aplicación + Presentación + Sesión</td></tr>
+            <tr><td>Transporte</td><td>Transporte</td></tr>
+            <tr><td>Internet</td><td>Red</td></tr>
+            <tr><td>Acceso a la red (host a red)</td><td>Enlace de datos + Física</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="accordion" id="accordionTcpip">
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">4</span>
+            <span>Aplicación</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Es donde funcionan los protocolos que usan directamente los programas: navegar
+              la web, mandar correos, transferir archivos. Algunos protocolos y su función:</p>
+            <ul>
+              <li><strong>HTTP:</strong> transferencia de páginas web. Usa el puerto <strong>80</strong> (y 443 para HTTPS).</li>
+              <li><strong>FTP:</strong> transferencia de archivos entre computadoras.</li>
+              <li><strong>SMTP:</strong> envío de correo electrónico.</li>
+              <li><strong>POP3 / IMAP:</strong> recepción de correo. POP3 descarga los mensajes; IMAP los mantiene guardados en el servidor de correo, para poder verlos desde varios dispositivos.</li>
+              <li><strong>SNMP</strong> (Simple Network Management Protocol): permite administrar y monitorear dispositivos de red de forma remota.</li>
+            </ul>
+            <p><strong>HTTP vs HTTPS:</strong> HTTPS es HTTP con una capa extra de encriptación
+              (usando el protocolo <strong>SSL/TLS</strong>), que protege los datos que viajan
+              entre el navegador y el servidor para que nadie pueda espiarlos ni modificarlos.</p>
+            <p><strong>TELNET vs SSH:</strong> ambos permiten conectarse de forma remota a otra
+              computadora usando una terminal, pero SSH es mucho más seguro porque encripta toda
+              la comunicación, mientras que TELNET la envía sin proteger.</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">3</span>
+            <span>Transporte</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Proporciona servicio de comunicación confiable de extremo a extremo (con
+              <strong>TCP</strong>) o servicios de comunicación sin garantía de entrega (con
+              <strong>UDP</strong>). Esta capa segmenta y ordena los datos, multiplexa las
+              conexiones simultáneas y define cómo dos aplicaciones mantienen una conversación
+              sobre el protocolo IP.</p>
+            <p>Dos funciones clave de esta capa: dividir los datos en segmentos manejables, y
+              controlar que la información llegue en el orden correcto (en el caso de TCP).</p>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">2</span>
+            <span>Internet</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Se encarga del direccionamiento lógico, del enrutamiento, de la fragmentación de
+              paquetes y de su reenvío. Pensalo como el "cartero" de la red: así como el correo
+              recibe una carta y una dirección de destino, esta capa recibe de la capa de
+              transporte un <strong>paquete de datos</strong> (equivalente a la carta) junto con
+              una <strong>dirección IP</strong> de destino (equivalente a la dirección postal).</p>
+            <p>Protocolos de esta capa:</p>
+            <ul>
+              <li><strong>IP</strong> (Internet Protocol): asigna y gestiona las direcciones lógicas.</li>
+              <li><strong>ICMP</strong> (Protocolo de Control de Mensajes de Internet): si hay un problema al enviar un mensaje, ICMP le avisa al emisor con un mensaje de error (es lo que usa el comando <code>ping</code>).</li>
+              <li><strong>ARP</strong> (Address Resolution Protocol): obtiene la dirección MAC (física) a partir de una dirección IP.</li>
+              <li><strong>RARP</strong> (Reverse ARP): hace el proceso inverso, obtiene una dirección IP a partir de una dirección MAC.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">1</span>
+            <span>Acceso a la red (host a red)</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Maneja cómo los datos se transmiten físicamente. Usa un protocolo distinto según
+              el medio: por ejemplo <strong>Ethernet</strong> para conexiones por cable, y
+              protocolos ópticos específicos para conexiones por fibra óptica.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TCP vs UDP: CUÁNDO USAR CADA UNO ===================== -->
+    <section class="section-block reveal">
+      <h2>TCP vs UDP: ¿cuál usar según la situación?</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Situación</th><th>Protocolo recomendado</th><th>Por qué</th></tr></thead>
+          <tbody>
+            <tr><td>Enviar correo electrónico</td><td>TCP</td><td>Importa que todos los datos lleguen completos y en orden, la velocidad no es lo prioritario.</td></tr>
+            <tr><td>Video o llamadas en vivo / juegos online</td><td>UDP</td><td>Importa más la velocidad y la baja latencia que la entrega perfecta de cada paquete.</td></tr>
+            <tr><td>Menor latencia</td><td>UDP</td><td>No pierde tiempo confirmando la recepción de cada paquete.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== TABLA DE PUERTOS ===================== -->
+    <section class="section-block reveal">
+      <h2>Protocolos y sus puertos</h2>
+      <p class="section-lead">
+        Los <strong>puertos</strong> son números que identifican a qué aplicación pertenece
+        cada dato que llega a un equipo. Así, una misma computadora puede tener el navegador,
+        el correo y otros programas usando la red al mismo tiempo, sin que los datos se mezclen.
+      </p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Protocolo</th><th>Puerto</th><th>Función</th></tr></thead>
+          <tbody>
+            <tr><td>HTTP</td><td>80</td><td>Navegación web</td></tr>
+            <tr><td>HTTPS</td><td>443</td><td>Navegación web segura</td></tr>
+            <tr><td>FTP</td><td>21</td><td>Transferencia de archivos</td></tr>
+            <tr><td>SMTP</td><td>25</td><td>Envío de correo</td></tr>
+            <tr><td>POP3</td><td>110</td><td>Recepción de correo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===================== RELACIONAR CON FLECHAS (interactivo con JS) ===================== -->
+    <section class="section-block reveal">
+      <h2>Para seguir aprendiendo: relacioná cada elemento con su capa</h2>
+      <p class="section-lead">Hacé clic primero en un elemento de la izquierda y después en la capa que le corresponde.</p>
+
+      <div class="matching-game" id="matchingGame">
+        <div class="matching-col">
+          <button class="match-item" data-match="puerto">Puerto</button>
+          <button class="match-item" data-match="mac">Dirección física o MAC</button>
+          <button class="match-item" data-match="ip">Dirección lógica o dirección IP</button>
+        </div>
+        <div class="matching-col">
+          <button class="match-item" data-target="transporte">Capa de transporte</button>
+          <button class="match-item" data-target="acceso">Capa de host a red (acceso)</button>
+          <button class="match-item" data-target="internet">Capa de red o de Internet</button>
+        </div>
+      </div>
+      <p id="matchingFeedback" class="matching-feedback" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

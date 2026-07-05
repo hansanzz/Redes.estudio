@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Direccionamiento IP | Redes.estudio</title>
+  <meta name="description" content="Cómo están conformadas las direcciones IP, clases de red A, B, C, D y E, broadcast y multicast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-tema" data-color="ip">
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="topologias.html">Topologías</a></li>
+        <li><a href="modelo-osi.html">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html" class="active">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tema-hero reveal">
+      <p class="eyebrow">Tema 4 de 4</p>
+      <h1>Direccionamiento IP</h1>
+      <p class="hero-lead">
+        La dirección IP es una dirección <strong>lógica</strong> (no física, como la MAC):
+        se le asigna a cada equipo, no viene "de fábrica" grabada en el hardware, y puede
+        cambiar según a qué red te conectes. Nunca puede haber dos equipos con la misma
+        dirección IP dentro de una misma red al mismo tiempo, porque generaría un conflicto.
+      </p>
+    </section>
+
+    <!-- ===================== ESTRUCTURA DE LA DIRECCIÓN IP ===================== -->
+    <section class="section-block reveal">
+      <h2>¿Cómo está formada una dirección IP?</h2>
+      <p class="section-lead">
+        Una dirección IP (versión 4) está formada por <strong>4 bytes</strong>, es decir,
+        <strong>32 bits</strong> en total. Cada byte se escribe en formato decimal, separado
+        por puntos: por ejemplo, <code>192.168.1.10</code>.
+      </p>
+
+      <div class="ip-bytes-demo">
+        <div class="byte-box"><span class="byte-label">Byte 3</span><span class="byte-value">192</span></div>
+        <span class="byte-dot">.</span>
+        <div class="byte-box"><span class="byte-label">Byte 2</span><span class="byte-value">168</span></div>
+        <span class="byte-dot">.</span>
+        <div class="byte-box"><span class="byte-label">Byte 1</span><span class="byte-value">001</span></div>
+        <span class="byte-dot">.</span>
+        <div class="byte-box"><span class="byte-label">Byte 0</span><span class="byte-value">010</span></div>
+      </div>
+
+      <p>
+        Con 8 bits, el número más grande que se puede formar es <strong>255</strong>
+        (en binario: 11111111), y en total se pueden formar <strong>256 números diferentes</strong>
+        (del 0 al 255), porque 2 elevado a la 8 es igual a 256.
+      </p>
+
+      <p>
+        Cada dirección IP se puede dividir conceptualmente en dos partes:
+      </p>
+      <ul class="check-list">
+        <li><strong>Parte de red:</strong> identifica a qué red pertenece el equipo.</li>
+        <li><strong>Parte de host:</strong> identifica a ese equipo específico dentro de esa red.</li>
+      </ul>
+    </section>
+
+    <!-- ===================== CLASES DE RED ===================== -->
+    <section class="section-block reveal">
+      <h2>Clases de red: A, B, C, D y E</h2>
+      <p class="section-lead">
+        Existen 5 clases de direcciones IP. Las primeras tres (A, B y C) se usan para asignar
+        direcciones a redes y equipos; la D y la E tienen usos especiales.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Clase</th><th>Byte 3</th><th>Byte 2</th><th>Byte 1</th><th>Byte 0</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>A</td><td>Red</td><td>Host</td><td>Host</td><td>Host</td></tr>
+            <tr><td>B</td><td>Red</td><td>Red</td><td>Host</td><td>Host</td></tr>
+            <tr><td>C</td><td>Red</td><td>Red</td><td>Red</td><td>Host</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cards-grid">
+        <div class="info-card">
+          <h3>Clase A</h3>
+          <p>Pocas redes, pero cada una con muchísimos hosts posibles. La usan organizaciones
+            enormes, como <strong>gobiernos</strong>, que tienen pocas LAN pero cada una con
+            muchísimos equipos conectados.</p>
+        </div>
+        <div class="info-card">
+          <h3>Clase B</h3>
+          <p>Un equilibrio entre cantidad de redes y cantidad de hosts por red. La suelen usar
+            <strong>empresas medianas</strong>, que necesitan varias subredes con una cantidad
+            moderada de equipos en cada una.</p>
+        </div>
+        <div class="info-card">
+          <h3>Clase C</h3>
+          <p>Muchísimas redes posibles, pero cada una con pocos hosts. La usan
+            <strong>usuarios particulares</strong> y redes domésticas: representan muchas redes
+            chicas, cada una con pocos equipos conectados.</p>
+        </div>
+        <div class="info-card">
+          <h3>Clases D y E</h3>
+          <p>La clase D se usa para <strong>multicast</strong> (enviar un mismo mensaje a un
+            grupo específico de receptores). La clase E está reservada para uso
+            <strong>experimental</strong> y de investigación, no se usa en redes comerciales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BROADCAST Y MULTICAST ===================== -->
+    <section class="section-block reveal">
+      <h2>Broadcast y Multicast</h2>
+      <div class="info-card">
+        <p>
+          <strong>Broadcast</strong> es cuando un mensaje se envía a <em>todos</em> los equipos
+          de una red al mismo tiempo. Una dirección IP de broadcast se identifica porque tiene
+          <strong>todos los bits de la parte de host en 1</strong> (es decir, en 255 en esa
+          parte de la dirección).
+        </p>
+        <p>
+          <strong>Multicast</strong>, en cambio, envía el mensaje solo a un <em>grupo</em>
+          específico de receptores que se suscribieron a esa comunicación, no a todos los
+          equipos de la red. Usa las direcciones de clase D.
+        </p>
+        <p>
+          Por otro lado, una dirección IP que tiene <strong>todos los bits de host en 0</strong>
+          no identifica a un equipo en particular, sino que identifica a <strong>la red
+          entera</strong> (es la "dirección de red").
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== CALCULADORA DE CLASE DE IP (interactiva con prompt) ===================== -->
+    <section class="section-block reveal">
+      <h2>Calculadora de clase de IP</h2>
+      <p class="section-lead">
+        Escribí una dirección IP (formato <code>x.x.x.x</code>) y el sitio te dice a qué
+        clase pertenece y por qué. También podés probarlo con una ventana emergente.
+      </p>
+
+      <div class="ip-calculator">
+        <div class="form-field">
+          <label for="inputIp">Dirección IP</label>
+          <input type="text" id="inputIp" placeholder="Ej: 192.168.1.10">
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-primary" id="btnCalcularIp">Calcular clase</button>
+          <button class="btn btn-ghost" id="btnPromptIp">Probar con ventana emergente</button>
+        </div>
+        <div class="ip-result" id="ipResult" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- ===================== ROUTER Y ENRUTAMIENTO ===================== -->
+    <section class="section-block reveal">
+      <h2>Para seguir aprendiendo: el router</h2>
+      <div class="info-card">
+        <p>
+          El dispositivo de capa 3 que conecta distintas redes y maneja direcciones IP es el
+          <strong>router</strong>. Puede separar dominios y dividir una red grande en redes más
+          pequeñas, llamadas subredes locales.
+        </p>
+        <p>
+          Cuando los nodos de una red están conectados por múltiples trayectorias posibles,
+          es el <strong>router</strong> el que elige el mejor camino para cada comunicación,
+          usando protocolos de enrutamiento para decidir la ruta más eficiente en cada momento.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

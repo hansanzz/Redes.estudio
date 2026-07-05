@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes de Computadoras | Evaluación Domiciliaria</title>
+  <meta name="description" content="Sitio de estudio sobre topologías, modelo OSI, modelo TCP/IP y direccionamiento IP.">
+
+  <!-- Tipografías: JetBrains Mono para títulos/números, Inter para texto de lectura -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-home">
+
+  <!-- ===================== NAVEGACIÓN PRINCIPAL ===================== -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+
+      <!-- Botón hamburguesa para mobile -->
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="topologias.html" data-tema="topologias">Topologías</a></li>
+        <li><a href="modelo-osi.html" data-tema="osi">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html" data-tema="tcpip">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html" data-tema="ip">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===================== HERO: MAPA DE RED INTERACTIVO ===================== -->
+    <section class="hero">
+      <div class="hero-text reveal">
+        <p class="eyebrow">Evaluación domiciliaria — Informática</p>
+        <h1>Redes de Computadoras</h1>
+        <p class="hero-lead">
+          Un recorrido por cómo se arman, organizan y comunican las redes: desde la forma
+          física en que se conectan los equipos, hasta cómo viaja un solo dato desde tu
+          computadora hasta un servidor al otro lado del mundo.
+        </p>
+        <p class="hero-hint">Elegí un nodo del mapa o usá el menú para empezar. Cada tema tiene su propio color.</p>
+      </div>
+
+      <!-- Mapa de red SVG: 4 nodos temáticos + nodo central "Redes" -->
+      <div class="network-map reveal" aria-label="Mapa de navegación por temas">
+        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapTitle">
+          <title id="mapTitle">Mapa de los 4 temas de la guía, conectados a un nodo central</title>
+
+          <!-- Cables (líneas) con clase para animación de "pulso" via CSS -->
+          <line class="cable cable-top" x1="300" y1="230" x2="150" y2="90"></line>
+          <line class="cable cable-top" x1="300" y1="230" x2="450" y2="90"></line>
+          <line class="cable cable-bot" x1="300" y1="230" x2="150" y2="370"></line>
+          <line class="cable cable-bot" x1="300" y1="230" x2="450" y2="370"></line>
+
+          <!-- Nodo central -->
+          <g class="node node-center">
+            <circle cx="300" cy="230" r="46"></circle>
+            <text x="300" y="235" text-anchor="middle">Redes</text>
+          </g>
+
+          <!-- Nodo: Topologías (azul) -->
+          <a href="topologias.html" aria-label="Ir a Topologías">
+            <g class="node node-link" data-color="topologias">
+              <circle cx="150" cy="90" r="58"></circle>
+              <text x="150" y="86" text-anchor="middle">Topologías</text>
+              <text x="150" y="104" text-anchor="middle" class="node-sub">cómo se conectan</text>
+            </g>
+          </a>
+
+          <!-- Nodo: Modelo OSI (violeta) -->
+          <a href="modelo-osi.html" aria-label="Ir a Modelo OSI">
+            <g class="node node-link" data-color="osi">
+              <circle cx="450" cy="90" r="58"></circle>
+              <text x="450" y="86" text-anchor="middle">Modelo OSI</text>
+              <text x="450" y="104" text-anchor="middle" class="node-sub">7 capas teóricas</text>
+            </g>
+          </a>
+
+          <!-- Nodo: TCP/IP (coral) -->
+          <a href="modelo-tcpip.html" aria-label="Ir a Modelo TCP/IP">
+            <g class="node node-link" data-color="tcpip">
+              <circle cx="150" cy="370" r="58"></circle>
+              <text x="150" y="366" text-anchor="middle">TCP/IP</text>
+              <text x="150" y="384" text-anchor="middle" class="node-sub">el modelo real</text>
+            </g>
+          </a>
+
+          <!-- Nodo: Direccionamiento IP (verde) -->
+          <a href="direccionamiento-ip.html" aria-label="Ir a Direccionamiento IP">
+            <g class="node node-link" data-color="ip">
+              <circle cx="450" cy="370" r="58"></circle>
+              <text x="450" y="362" text-anchor="middle">Direcciona-</text>
+              <text x="450" y="378" text-anchor="middle">miento IP</text>
+            </g>
+          </a>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===================== POR QUÉ ESTOS COLORES ===================== -->
+    <section class="section-block reveal">
+      <h2>Un color para cada idea</h2>
+      <p class="section-lead">
+        Cada tema tiene un color que no es al azar: está elegido según lo que ese tema
+        representa. Asociar color con contenido es además una técnica real de estudio,
+        así que usalo a tu favor mientras repasás.
+      </p>
+
+      <div class="color-legend">
+        <div class="legend-item" data-color="topologias">
+          <span class="dot"></span>
+          <div>
+            <strong>Azul petróleo — Topologías</strong>
+            <p>El azul transmite orden y confianza. Es el color que eligió toda la industria
+              de redes (Cisco, IBM, Intel) porque comunica estabilidad, igual que una topología
+              bien armada.</p>
+          </div>
+        </div>
+        <div class="legend-item" data-color="osi">
+          <span class="dot"></span>
+          <div>
+            <strong>Violeta — Modelo OSI</strong>
+            <p>El violeta se asocia a lo abstracto. OSI es un modelo teórico de 7 capas que no
+              existe físicamente: es un mapa conceptual para entender la comunicación.</p>
+          </div>
+        </div>
+        <div class="legend-item" data-color="tcpip">
+          <span class="dot"></span>
+          <div>
+            <strong>Coral — Modelo TCP/IP</strong>
+            <p>TCP/IP es el modelo que de verdad mueve los datos en Internet: es acción. Un
+              coral cálido transmite energía sin la agresividad de un rojo puro.</p>
+          </div>
+        </div>
+        <div class="legend-item" data-color="ip">
+          <span class="dot"></span>
+          <div>
+            <strong>Verde — Direccionamiento IP</strong>
+            <p>El verde es el color universal de "correcto". Direccionamiento IP es cálculo
+              exacto de bits y clases, así que el verde refuerza la idea de precisión.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== POR DÓNDE EMPEZAR (interactivo) ===================== -->
+    <section class="section-block reveal" id="empezar">
+      <h2>¿Por dónde empezar a repasar?</h2>
+      <p class="section-lead">
+        Contestá esto y te sugerimos un orden de repaso. No se guarda en ningún lado,
+        es solo una ayuda para organizar tu estudio.
+      </p>
+
+      <div class="start-picker" role="group" aria-label="Elegí tu nivel de repaso">
+        <button class="pick-btn" data-nivel="nunca">Todavía no vi nada de esto</button>
+        <button class="pick-btn" data-nivel="una-vez">Ya lo repasé una vez</button>
+        <button class="pick-btn" data-nivel="repaso-final">Quiero un repaso final antes de la evaluación</button>
+      </div>
+
+      <div class="start-result" id="startResult" aria-live="polite">
+        Elegí una opción de arriba para ver una sugerencia de por dónde arrancar.
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon" aria-hidden="true">💡</span>
+        <p><strong>Tip de estudio:</strong> como cada tema tiene su propio color en este sitio, cuando repases de memoria intentá recordar primero el color y después el contenido — asociar color con contenido ayuda a fijar la información.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante volver arriba -->
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
