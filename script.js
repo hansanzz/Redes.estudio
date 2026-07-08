@@ -155,10 +155,11 @@ if (startPicker) {
 
 /* --------------------------------------------------------------------
    6.b "CERRAR TODOS LOS PANELES" del acordeón (usa confirm())
+   Puede haber uno de estos botones en más de una página.
    -------------------------------------------------------------------- */
-const btnCerrarTodo = document.getElementById('btnCerrarTodo');
+const botonesCerrarTodo = document.querySelectorAll('.btn-cerrar-todo');
 
-if (btnCerrarTodo) {
+botonesCerrarTodo.forEach((btnCerrarTodo) => {
   btnCerrarTodo.addEventListener('click', () => {
     const acordeon = document.getElementById(btnCerrarTodo.dataset.accordion);
     const panelesAbiertos = acordeon.querySelectorAll('.accordion-header[aria-expanded="true"]');
@@ -179,7 +180,7 @@ if (btnCerrarTodo) {
       panel.classList.remove('is-open');
     });
   });
-}
+});
 
 /* --------------------------------------------------------------------
    7. COMPARADOR LAN / WAN / INTERNET — solo en topologias.html
@@ -252,6 +253,33 @@ if (selectProtocolo) {
     }
     translatorResult.textContent = `${valor} pertenece a la capa de ${capaPorProtocolo[valor]}.`;
     translatorResult.classList.add('has-result');
+  });
+}
+
+/* --------------------------------------------------------------------
+   8.b TRADUCTOR DE DISPOSITIVOS DE RED — introduccion.html
+   -------------------------------------------------------------------- */
+const selectDispositivo = document.getElementById('selectDispositivo');
+
+if (selectDispositivo) {
+  const infoPorDispositivo = {
+    Hub: 'No filtra tráfico: reenvía los datos a todos los puertos por igual. Todos los equipos conectados comparten un único dominio de colisión grande.',
+    Bridge: 'Filtra tráfico por dirección MAC (capa de Enlace) y rompe los dominios de colisión, separando la red en partes más chicas.',
+    Switch: 'Igual que el bridge: filtra por dirección MAC y rompe los dominios de colisión, pero pensado para manejar muchos más puertos y tráfico a la vez.',
+    Router: 'Filtra tráfico por dirección IP (capa de Red). Se usa para interconectar redes distintas y para salir a Internet.',
+  };
+
+  const dispositivoResult = document.getElementById('dispositivoResult');
+
+  selectDispositivo.addEventListener('change', () => {
+    const valor = selectDispositivo.value;
+    if (valor === '') {
+      dispositivoResult.textContent = 'Elegí un dispositivo de la lista para ver el resultado acá.';
+      dispositivoResult.classList.remove('has-result');
+      return;
+    }
+    dispositivoResult.textContent = `${valor}: ${infoPorDispositivo[valor]}`;
+    dispositivoResult.classList.add('has-result');
   });
 }
 

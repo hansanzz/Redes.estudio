@@ -29,6 +29,7 @@
 
       <ul class="nav-menu" id="navMenu">
         <li><a href="index.html" class="active">Inicio</a></li>
+        <li><a href="introduccion.html">Introducción</a></li>
         <li><a href="topologias.html" data-tema="topologias">Topologías</a></li>
         <li><a href="modelo-osi.html" data-tema="osi">Modelo OSI</a></li>
         <li><a href="modelo-tcpip.html" data-tema="tcpip">Modelo TCP/IP</a></li>
@@ -51,56 +52,66 @@
         <p class="hero-hint">Elegí un nodo del mapa o usá el menú para empezar. Cada tema tiene su propio color.</p>
       </div>
 
-      <!-- Mapa de red SVG: 4 nodos temáticos + nodo central "Redes" -->
+      <!-- Mapa de red SVG: 5 nodos temáticos (pentágono) + nodo central "Redes" -->
       <div class="network-map reveal" aria-label="Mapa de navegación por temas">
-        <svg viewBox="0 0 600 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapTitle">
-          <title id="mapTitle">Mapa de los 4 temas de la guía, conectados a un nodo central</title>
+        <svg viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="mapTitle">
+          <title id="mapTitle">Mapa de los 5 temas de la guía, conectados a un nodo central</title>
 
           <!-- Cables (líneas) con clase para animación de "pulso" via CSS -->
-          <line class="cable cable-top" x1="300" y1="230" x2="150" y2="90"></line>
-          <line class="cable cable-top" x1="300" y1="230" x2="450" y2="90"></line>
-          <line class="cable cable-bot" x1="300" y1="230" x2="150" y2="370"></line>
-          <line class="cable cable-bot" x1="300" y1="230" x2="450" y2="370"></line>
+          <line class="cable cable-top" x1="300" y1="260" x2="300" y2="60"></line>
+          <line class="cable cable-top" x1="300" y1="260" x2="490" y2="198"></line>
+          <line class="cable cable-bot" x1="300" y1="260" x2="418" y2="422"></line>
+          <line class="cable cable-bot" x1="300" y1="260" x2="182" y2="422"></line>
+          <line class="cable cable-top" x1="300" y1="260" x2="110" y2="198"></line>
 
           <!-- Nodo central -->
           <g class="node node-center">
-            <circle cx="300" cy="230" r="46"></circle>
-            <text x="300" y="235" text-anchor="middle">Redes</text>
+            <circle cx="300" cy="260" r="42"></circle>
+            <text x="300" y="265" text-anchor="middle">Redes</text>
           </g>
+
+          <!-- Nodo: Introducción (ocre) -->
+          <a href="introduccion.html" aria-label="Ir a Introducción">
+            <g class="node node-link" data-color="intro">
+              <circle cx="300" cy="60" r="55"></circle>
+              <text x="300" y="56" text-anchor="middle">Introducción</text>
+              <text x="300" y="74" text-anchor="middle" class="node-sub">los fundamentos</text>
+            </g>
+          </a>
 
           <!-- Nodo: Topologías (azul) -->
           <a href="topologias.html" aria-label="Ir a Topologías">
             <g class="node node-link" data-color="topologias">
-              <circle cx="150" cy="90" r="58"></circle>
-              <text x="150" y="86" text-anchor="middle">Topologías</text>
-              <text x="150" y="104" text-anchor="middle" class="node-sub">cómo se conectan</text>
+              <circle cx="490" cy="198" r="55"></circle>
+              <text x="490" y="194" text-anchor="middle">Topologías</text>
+              <text x="490" y="212" text-anchor="middle" class="node-sub">cómo se conectan</text>
             </g>
           </a>
 
           <!-- Nodo: Modelo OSI (violeta) -->
           <a href="modelo-osi.html" aria-label="Ir a Modelo OSI">
             <g class="node node-link" data-color="osi">
-              <circle cx="450" cy="90" r="58"></circle>
-              <text x="450" y="86" text-anchor="middle">Modelo OSI</text>
-              <text x="450" y="104" text-anchor="middle" class="node-sub">7 capas teóricas</text>
+              <circle cx="418" cy="422" r="55"></circle>
+              <text x="418" y="418" text-anchor="middle">Modelo OSI</text>
+              <text x="418" y="436" text-anchor="middle" class="node-sub">7 capas teóricas</text>
             </g>
           </a>
 
           <!-- Nodo: TCP/IP (coral) -->
           <a href="modelo-tcpip.html" aria-label="Ir a Modelo TCP/IP">
             <g class="node node-link" data-color="tcpip">
-              <circle cx="150" cy="370" r="58"></circle>
-              <text x="150" y="366" text-anchor="middle">TCP/IP</text>
-              <text x="150" y="384" text-anchor="middle" class="node-sub">el modelo real</text>
+              <circle cx="182" cy="422" r="55"></circle>
+              <text x="182" y="418" text-anchor="middle">TCP/IP</text>
+              <text x="182" y="436" text-anchor="middle" class="node-sub">el modelo real</text>
             </g>
           </a>
 
           <!-- Nodo: Direccionamiento IP (verde) -->
           <a href="direccionamiento-ip.html" aria-label="Ir a Direccionamiento IP">
             <g class="node node-link" data-color="ip">
-              <circle cx="450" cy="370" r="58"></circle>
-              <text x="450" y="362" text-anchor="middle">Direcciona-</text>
-              <text x="450" y="378" text-anchor="middle">miento IP</text>
+              <circle cx="110" cy="198" r="55"></circle>
+              <text x="110" y="190" text-anchor="middle">Direcciona-</text>
+              <text x="110" y="206" text-anchor="middle">miento IP</text>
             </g>
           </a>
         </svg>
@@ -117,6 +128,15 @@
       </p>
 
       <div class="color-legend">
+        <div class="legend-item" data-color="intro">
+          <span class="dot"></span>
+          <div>
+            <strong>Ocre dorado — Introducción</strong>
+            <p>Es el color de los cimientos, de la tierra sobre la que se construye todo lo
+              demás. Como es el primer tema, el que sostiene a los otros cuatro, un tono
+              cálido y terroso representa esa base.</p>
+          </div>
+        </div>
         <div class="legend-item" data-color="topologias">
           <span class="dot"></span>
           <div>

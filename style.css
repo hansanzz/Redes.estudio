@@ -24,6 +24,8 @@
   --warn: #B5654A;
 
   /* Colores temáticos (definidos con significado, ver index.html) */
+  --c-intro: #B8862E;
+  --c-intro-soft: #F1E4C9;
   --c-topologias: #2C5F7C;
   --c-topologias-soft: #DCE9F0;
   --c-osi: #5B4B8A;
@@ -48,6 +50,7 @@
 }
 
 /* Cada página temática sobrescribe --accent según su data-color */
+body.page-tema[data-color="intro"]      { --accent: var(--c-intro);      --accent-soft: var(--c-intro-soft); }
 body.page-tema[data-color="topologias"] { --accent: var(--c-topologias); --accent-soft: var(--c-topologias-soft); }
 body.page-tema[data-color="osi"]        { --accent: var(--c-osi);        --accent-soft: var(--c-osi-soft); }
 body.page-tema[data-color="tcpip"]      { --accent: var(--c-tcpip);      --accent-soft: var(--c-tcpip-soft); }
@@ -325,6 +328,7 @@ main { display: block; }
   fill: var(--muted);
 }
 
+.node-link[data-color="intro"] circle       { stroke: var(--c-intro); }
 .node-link[data-color="topologias"] circle { stroke: var(--c-topologias); }
 .node-link[data-color="osi"] circle        { stroke: var(--c-osi); }
 .node-link[data-color="tcpip"] circle      { stroke: var(--c-tcpip); }
@@ -334,6 +338,7 @@ main { display: block; }
 .node-link:focus circle {
   transform: scale(1.06);
 }
+.node-link[data-color="intro"]:hover circle       { fill: var(--c-intro-soft); }
 .node-link[data-color="topologias"]:hover circle { fill: var(--c-topologias-soft); }
 .node-link[data-color="osi"]:hover circle        { fill: var(--c-osi-soft); }
 .node-link[data-color="tcpip"]:hover circle      { fill: var(--c-tcpip-soft); }
@@ -342,7 +347,7 @@ main { display: block; }
 /* ---------- 7. LEYENDA DE COLORES (HOME) ---------- */
 .color-legend {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
 }
 
@@ -362,6 +367,7 @@ main { display: block; }
   border-radius: 50%;
   margin-top: 0.3rem;
 }
+.legend-item[data-color="intro"] .dot       { background: var(--c-intro); }
 .legend-item[data-color="topologias"] .dot { background: var(--c-topologias); }
 .legend-item[data-color="osi"] .dot        { background: var(--c-osi); }
 .legend-item[data-color="tcpip"] .dot      { background: var(--c-tcpip); }
@@ -518,6 +524,7 @@ tbody tr { border-top: 1px solid var(--border); }
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+.cards-grid-3 { grid-template-columns: repeat(3, 1fr); }
 
 /* ---------- 13. COMPARADOR LAN/WAN/INTERNET ---------- */
 .comparator-buttons {
@@ -785,6 +792,30 @@ tbody tr { border-top: 1px solid var(--border); }
   stroke-width: 2;
 }
 
+/* Elipse punteada que representa un dominio de colisión */
+.diag-domain {
+  fill: none;
+  stroke: var(--warn);
+  stroke-width: 2;
+  stroke-dasharray: 7 6;
+}
+
+/* Etiquetas de texto dentro de los diagramas (ej: "Directo" / "Cruzado") */
+.diag-label {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 12px;
+  fill: var(--accent);
+}
+.diag-tag {
+  font-family: var(--font-body);
+  font-size: 10px;
+  fill: var(--muted);
+}
+.diag-cable-dashed {
+  stroke-dasharray: 5 4;
+}
+
 /* ---------- 17.c AVISOS / CALLOUTS ---------- */
 .callout {
   max-width: 780px;
@@ -904,6 +935,7 @@ tbody tr { border-top: 1px solid var(--border); }
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; }
   .cards-grid { grid-template-columns: 1fr; }
+  .cards-grid-3 { grid-template-columns: 1fr; }
   .topology-diagram { flex: 0 0 210px; width: 210px; }
 }
 

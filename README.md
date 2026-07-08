@@ -1,22 +1,24 @@
 # Redes.estudio — Evaluación domiciliaria de Informática
 
 Sitio web estático (HTML, CSS y JavaScript puro, sin frameworks ni librerías)
-sobre los 4 temas de la guía de Redes:
+sobre los 5 temas de la guía de Redes:
 
-1. Topologías de red
-2. Modelo OSI
-3. Modelo TCP/IP
-4. Direccionamiento IP
+1. Introducción (recursos compartidos, cableado, dominios de colisión, dispositivos de red)
+2. Topologías de red
+3. Modelo OSI
+4. Modelo TCP/IP
+5. Direccionamiento IP
 
 ## Estructura del proyecto
 
 ```
 evaluacion-redes/
-├── index.html                → Portada con mapa de red interactivo y login demo
-├── topologias.html           → Tema 1
-├── modelo-osi.html           → Tema 2
-├── modelo-tcpip.html         → Tema 3
-├── direccionamiento-ip.html  → Tema 4
+├── index.html                → Portada con mapa de red interactivo (pentágono de 5 temas)
+├── introduccion.html         → Tema 1
+├── topologias.html           → Tema 2
+├── modelo-osi.html           → Tema 3
+├── modelo-tcpip.html         → Tema 4
+├── direccionamiento-ip.html  → Tema 5
 ├── style.css                 → Todos los estilos del sitio
 ├── script.js                 → Toda la lógica JavaScript del sitio
 └── README.md                 → Este archivo
@@ -81,13 +83,13 @@ cualquiera de las siguientes plataformas.
 
 ## Notas para la entrega
 
-- El formulario de login de la portada es **solo una demostración visual**:
-  no hay servidor ni base de datos detrás, valida los campos con JavaScript
-  y muestra un `alert()` de confirmación.
+- La portada tiene un selector interactivo ("¿Por dónde empezar?") que sugiere un
+  orden de repaso según cuánto ya estudiaste; no guarda datos en ningún lado.
 - La calculadora de clase de IP (en la página de Direccionamiento IP) permite
   probar tanto escribiendo en un campo de texto como con una ventana emergente
   (`prompt()`), para que se vea el uso de distintas formas de interacción con
   el usuario.
 - El sitio es responsive: se probó el comportamiento en pantallas de
   escritorio, tablet y celular (el menú se convierte en un botón hamburguesa
-  por debajo de los 700px de ancho).
+  por debajo de los 700px de ancho, y los diagramas de topología pasan de
+  estar al costado del texto a estar debajo).

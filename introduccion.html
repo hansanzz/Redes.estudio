@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Introducción a Redes | Redes.estudio</title>
+  <meta name="description" content="Fundamentos de redes: recursos compartidos, cableado, dominios de colisión, dispositivos de red y direcciones MAC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-tema" data-color="intro">
+
+  <header class="site-header">
+    <nav class="navbar" aria-label="Navegación principal">
+      <a href="index.html" class="brand">
+        <span class="brand-icon" aria-hidden="true">◆</span>
+        <span>Redes<em>.</em>estudio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="introduccion.html" class="active">Introducción</a></li>
+        <li><a href="topologias.html">Topologías</a></li>
+        <li><a href="modelo-osi.html">Modelo OSI</a></li>
+        <li><a href="modelo-tcpip.html">Modelo TCP/IP</a></li>
+        <li><a href="direccionamiento-ip.html">Direccionamiento IP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tema-hero reveal">
+      <p class="eyebrow">Tema 1 de 5</p>
+      <h1>Introducción a Redes</h1>
+      <p class="hero-lead">
+        Una <strong>red</strong> es, ni más ni menos, dos o más computadoras conectadas
+        entre sí para compartir recursos o servicios. Antes de meternos en topologías,
+        modelos de capas o direcciones IP, conviene tener claros algunos fundamentos:
+        qué se comparte en una red, cómo se cablean los equipos, qué es un dominio de
+        colisión y qué dispositivos arman una red por dentro.
+      </p>
+    </section>
+
+    <!-- ===================== RECURSOS COMPARTIDOS ===================== -->
+    <section class="section-block reveal">
+      <h2>¿Qué se comparte en una red?</h2>
+      <p class="section-lead">
+        Los recursos que se comparten entre computadoras conectadas se pueden clasificar
+        en tres categorías:
+      </p>
+
+      <div class="cards-grid cards-grid-3">
+        <div class="info-card">
+          <h3>Programas</h3>
+          <p>Aplicaciones o software al que varios equipos acceden sin necesidad de tener
+            una copia instalada localmente. Por ejemplo, cuando varias personas trabajan
+            al mismo tiempo sobre un procesador de texto que en realidad corre en una
+            computadora que funciona como <strong>servidor</strong>.</p>
+        </div>
+        <div class="info-card">
+          <h3>Equipos</h3>
+          <p>Hardware físico que se comparte entre varios usuarios de la red, como una
+            <strong>impresora</strong> de red, un escáner o un disco de almacenamiento
+            compartido, para no tener que comprar uno por cada computadora.</p>
+        </div>
+        <div class="info-card">
+          <h3>Datos</h3>
+          <p>Información almacenada a la que se accede a través de la red, como una
+            <strong>base de datos</strong>, o cuando entrás a la página web de tu banco
+            para consultar el saldo de tu cuenta: estás accediendo a datos que están
+            guardados en un servidor remoto.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon" aria-hidden="true">💡</span>
+        <p><strong>Para pensarlo:</strong> si desde tu computadora accedés a otra computadora de la red de tu casa (por ejemplo, para ver una carpeta compartida), estás accediendo a <strong>datos</strong> compartidos en esa red local.</p>
+      </div>
+    </section>
+
+    <!-- ===================== CABLEADO RJ45 ===================== -->
+    <section class="section-block reveal">
+      <h2>Cableado: directo vs. cruzado</h2>
+      <p class="section-lead">
+        Los cables de red más comunes usan conectores <strong>RJ45</strong>. Según qué
+        tipos de dispositivos vayas a conectar entre sí, se usa un cableado directo (recto)
+        o uno cruzado.
+      </p>
+
+      <div class="topology-content">
+        <div class="topology-text">
+          <p><strong>Cable directo (recto):</strong> se usa para conectar dos dispositivos
+            de <em>distinto</em> tipo, por ejemplo una computadora con un switch, o un
+            switch con un router. Es el cableado más común en una red hogareña o de oficina.</p>
+          <p><strong>Cable cruzado:</strong> se usa para conectar dos dispositivos del
+            <em>mismo</em> tipo de forma directa, por ejemplo dos computadoras entre sí sin
+            pasar por un switch, o dos switches entre sí. (Los equipos de red modernos suelen
+            detectar automáticamente qué cableado necesitan, pero es importante entender la
+            diferencia para la evaluación).</p>
+        </div>
+        <div class="topology-diagram">
+          <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diagrama comparando cable directo entre PC y switch, y cable cruzado entre dos PC">
+            <text x="130" y="18" text-anchor="middle" class="diag-label">Directo</text>
+            <line x1="40" y1="45" x2="220" y2="45" class="diag-cable"></line>
+            <g class="diag-node"><rect x="28" y="33" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node diag-hub"><rect x="208" y="33" width="24" height="24" rx="4"></rect></g>
+            <text x="40" y="80" text-anchor="middle" class="diag-tag">PC</text>
+            <text x="220" y="80" text-anchor="middle" class="diag-tag">Switch</text>
+
+            <text x="130" y="120" text-anchor="middle" class="diag-label">Cruzado</text>
+            <line x1="40" y1="147" x2="220" y2="147" class="diag-cable diag-cable-dashed"></line>
+            <g class="diag-node"><rect x="28" y="135" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node"><rect x="208" y="135" width="24" height="24" rx="4"></rect></g>
+            <text x="40" y="182" text-anchor="middle" class="diag-tag">PC</text>
+            <text x="220" y="182" text-anchor="middle" class="diag-tag">PC</text>
+          </svg>
+          <p class="diagram-caption">Directo: entre dispositivos distintos. Cruzado: entre dispositivos iguales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DOMINIOS DE COLISIÓN ===================== -->
+    <section class="section-block reveal">
+      <h2>Dominios de colisión</h2>
+      <p class="section-lead">
+        Un <strong>dominio de colisión</strong> es la parte de la red que comparte el mismo
+        medio físico de transporte entre varias computadoras. Si dos equipos del mismo
+        dominio envían datos exactamente al mismo tiempo, esos datos pueden
+        <strong>colisionar</strong> y perderse.
+      </p>
+
+      <div class="callout callout-warn">
+        <span class="callout-icon" aria-hidden="true">⚠</span>
+        <p><strong>Cuanto más chico, mejor:</strong> conviene tener dominios de colisión con pocas computadoras. Cuantas más computadoras comparten un mismo dominio, más probable es que los mensajes choquen entre sí y se genere <strong>congestión de red</strong> (lentitud por la cantidad de colisiones y reintentos de envío).</p>
+      </div>
+
+      <div class="topology-content">
+        <div class="topology-text">
+          <p>
+            Compará estos dos escenarios con la misma cantidad de computadoras: con un
+            <strong>hub</strong>, todos los equipos conectados comparten un único dominio de
+            colisión grande. Con un <strong>switch</strong> o un <strong>bridge</strong>, cada
+            conexión tiene su propio dominio de colisión chico, así que las probabilidades de
+            que los datos choquen bajan muchísimo.
+          </p>
+        </div>
+        <div class="topology-diagram">
+          <svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Comparación entre un dominio de colisión grande con hub y varios dominios chicos con switch">
+            <ellipse cx="130" cy="110" rx="110" ry="95" class="diag-domain"></ellipse>
+            <line x1="130" y1="110" x2="130" y2="30" class="diag-cable"></line>
+            <line x1="130" y1="110" x2="210" y2="80" class="diag-cable"></line>
+            <line x1="130" y1="110" x2="185" y2="180" class="diag-cable"></line>
+            <line x1="130" y1="110" x2="75" y2="180" class="diag-cable"></line>
+            <line x1="130" y1="110" x2="50" y2="80" class="diag-cable"></line>
+            <g class="diag-node diag-hub"><rect x="112" y="92" width="36" height="36" rx="6"></rect></g>
+            <g class="diag-node"><rect x="118" y="14" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node"><rect x="200" y="68" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node"><rect x="174" y="168" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node"><rect x="64" y="168" width="24" height="24" rx="4"></rect></g>
+            <g class="diag-node"><rect x="38" y="68" width="24" height="24" rx="4"></rect></g>
+          </svg>
+          <p class="diagram-caption">Con un hub: un único dominio de colisión grande (línea punteada) para todos los equipos.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DISPOSITIVOS DE RED (ACORDEÓN) ===================== -->
+    <section class="section-block reveal">
+      <h2>Dispositivos de red</h2>
+      <p class="section-lead">
+        Estos son los dispositivos más comunes para armar una red. Hacé clic en cada uno
+        para ver su función, en qué capa trabaja y cómo se relaciona con los dominios de
+        colisión.
+      </p>
+
+      <div class="accordion-controls">
+        <button class="btn btn-ghost btn-small btn-cerrar-todo" data-accordion="accordionIntro">Cerrar todos los paneles</button>
+      </div>
+
+      <div class="accordion" id="accordionIntro">
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">1</span>
+            <span>Hub</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Un hub es un <strong>repetidor</strong> que funciona como centro de una red:
+              recibe datos por un puerto y los reenvía por <em>todos</em> los demás puertos,
+              sin importar a qué equipo van dirigidos en realidad.</p>
+            <ul>
+              <li><strong>¿Filtra tráfico?</strong> No. Los datos que le llegan a un puerto se envían a todos los otros puertos, sin ningún criterio de selección.</li>
+              <li><strong>Dominios de colisión:</strong> todos los equipos conectados al mismo hub están en el mismo dominio de colisión (es un solo dominio grande).</li>
+              <li><strong>Conecta:</strong> computadoras a una red (no conecta redes distintas entre sí).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">2</span>
+            <span>Bridge</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Un bridge es un dispositivo que <strong>filtra tráfico de red</strong> según
+              la <strong>dirección MAC</strong> de destino, y descarta o reenvía cada dato
+              con ese criterio, en lugar de mandarlo a todos los puertos como hace un hub.
+              Trabaja en la capa de <strong>Enlace</strong> del modelo OSI.</p>
+            <ul>
+              <li><strong>¿Filtra tráfico?</strong> Sí, por dirección MAC.</li>
+              <li><strong>Dominios de colisión:</strong> un bridge "rompe" los dominios de colisión, es decir, separa la red en dominios más chicos e independientes entre sí.</li>
+              <li><strong>Conecta:</strong> redes entre sí (a diferencia del hub, que conecta computadoras a una misma red).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">3</span>
+            <span>Switch</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Un switch funciona igual que un bridge —filtra tráfico por dirección MAC y
+              rompe los dominios de colisión— pero está pensado para manejar muchos más
+              puertos y mucho más tráfico a la vez. Es el dispositivo que soluciona los
+              problemas de exceso de tráfico y colisiones en redes LAN modernas, y es la
+              opción que reemplazó casi por completo a los hubs.</p>
+            <ul>
+              <li><strong>¿Filtra tráfico?</strong> Sí, por dirección MAC.</li>
+              <li><strong>Dominios de colisión:</strong> cada puerto del switch es su propio dominio de colisión.</li>
+              <li><strong>En común con el bridge:</strong> ambos rompen los dominios de colisión filtrando por MAC; la diferencia es sobre todo de escala y velocidad.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-header" aria-expanded="false">
+            <span class="accordion-num">4</span>
+            <span>Router</span>
+            <span class="accordion-icon" aria-hidden="true">+</span>
+          </button>
+          <div class="accordion-panel">
+            <p>Un router utiliza <strong>direcciones IP</strong> (capa de Red) para decidir
+              hacia dónde enviar los datos, en lugar de direcciones MAC. Es el dispositivo
+              que se usa para <strong>interconectar redes distintas y acceder a Internet</strong>.</p>
+            <ul>
+              <li><strong>¿Filtra tráfico?</strong> Sí, por dirección IP.</li>
+              <li><strong>A diferencia del bridge/switch:</strong> trabaja en la capa de Red, no en la de Enlace.</li>
+              <li><strong>Conecta:</strong> redes distintas entre sí, incluyendo la salida hacia Internet.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== TRADUCTOR DE DISPOSITIVOS (interactivo) ===================== -->
+    <section class="section-block reveal">
+      <h2>¿Filtra tráfico o no?</h2>
+      <p class="section-lead">Elegí un dispositivo y te decimos si filtra tráfico y cómo se relaciona con los dominios de colisión.</p>
+
+      <div class="translator">
+        <label for="selectDispositivo">Dispositivo:</label>
+        <select id="selectDispositivo">
+          <option value="">— Elegí un dispositivo —</option>
+          <option value="Hub">Hub</option>
+          <option value="Bridge">Bridge</option>
+          <option value="Switch">Switch</option>
+          <option value="Router">Router</option>
+        </select>
+        <div class="translator-result" id="dispositivoResult">
+          Elegí un dispositivo de la lista para ver el resultado acá.
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== DIRECCIÓN MAC ===================== -->
+    <section class="section-block reveal">
+      <h2>Dirección MAC</h2>
+      <div class="info-card">
+        <p>
+          La <strong>dirección MAC</strong> (Media Access Control) es una dirección
+          <strong>física</strong>, de <strong>48 bits</strong>, que identifica de forma única
+          a cada placa de red. A diferencia de la dirección IP (que es lógica y puede
+          cambiar), la dirección MAC la asigna el <strong>fabricante</strong> de la placa de
+          red y viene "grabada" en el hardware: no la elegís vos ni se la asigna la red.
+        </p>
+        <p>
+          Las direcciones IP, en cambio, <strong>no</strong> las pone el fabricante: se
+          asignan según la red a la que te conectás (de forma fija o automática, con DHCP),
+          por eso una misma computadora puede tener distintas IP en distintas redes, pero
+          siempre la misma dirección MAC en la misma placa.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================== DISPOSITIVOS DE USUARIO FINAL VS DE RED ===================== -->
+    <section class="section-block reveal">
+      <h2>Dispositivos de usuario final vs. dispositivos de red</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Tipo</th><th>Qué son</th><th>Ejemplos</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Dispositivo de usuario final</td>
+              <td>El origen o destino final de la comunicación: donde una persona usa la red directamente.</td>
+              <td>Computadoras, celulares, impresoras, servidores de archivos.</td>
+            </tr>
+            <tr>
+              <td>Dispositivo de red</td>
+              <td>Los que transportan los datos entre los dispositivos de usuario final, sin ser el origen ni el destino de la información.</td>
+              <td>Hub, bridge, switch, router, access point.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-tip">
+        <span class="callout-icon" aria-hidden="true">💡</span>
+        <p><strong>Para seguir aprendiendo:</strong> pensando en los dispositivos que viste en esta página, ¿cuál filtra tráfico por dirección MAC y reduce las colisiones (capa de Enlace), y cuál filtra tráfico por dirección IP (capa de Red)? Repasá el acordeón de arriba si tenés dudas.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <p class="brand-footer"><span aria-hidden="true">◆</span> Redes<em>.</em>estudio</p>
+        <p>Evaluación domiciliaria — Informática · Nivel Secundario · Educación Técnico-Profesional.</p>
+      </div>
+      <div class="footer-info">
+        <p>Hora del sistema: <span id="reloj">--:--:--</span></p>
+        <p>Navegador detectado: <span id="navegadorInfo">—</span></p>
+      </div>
+    </div>
+  </footer>
+
+  <button id="btnVolverArriba" class="btn-top" aria-label="Volver arriba" title="Volver arriba">↑</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
