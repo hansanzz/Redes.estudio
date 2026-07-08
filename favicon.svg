@@ -1,0 +1,21 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo redondeado, color "ink" del sitio -->
+  <rect width="64" height="64" rx="14" fill="#2B2620"/>
+
+  <!-- Cables: líneas del nodo central a cada nodo de tema -->
+  <line x1="32" y1="34" x2="32" y2="14" stroke="#8C8271" stroke-width="2"/>
+  <line x1="32" y1="34" x2="51" y2="28" stroke="#8C8271" stroke-width="2"/>
+  <line x1="32" y1="34" x2="44" y2="50" stroke="#8C8271" stroke-width="2"/>
+  <line x1="32" y1="34" x2="20" y2="50" stroke="#8C8271" stroke-width="2"/>
+  <line x1="32" y1="34" x2="13" y2="28" stroke="#8C8271" stroke-width="2"/>
+
+  <!-- Nodo central: "Redes" -->
+  <circle cx="32" cy="34" r="5.5" fill="#FBF7F0"/>
+
+  <!-- 5 nodos de tema, mismos colores que las páginas del sitio -->
+  <circle cx="32" cy="14" r="6" fill="#B8862E"/> <!-- Introducción: ocre -->
+  <circle cx="51" cy="28" r="6" fill="#2C5F7C"/> <!-- Topologías: azul -->
+  <circle cx="44" cy="50" r="6" fill="#5B4B8A"/> <!-- Modelo OSI: violeta -->
+  <circle cx="20" cy="50" r="6" fill="#C9683F"/> <!-- TCP/IP: coral -->
+  <circle cx="13" cy="28" r="6" fill="#2F7A5E"/> <!-- Direccionamiento IP: verde -->
+</svg>
